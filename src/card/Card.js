@@ -6,6 +6,8 @@ import {
   deleteDoc,
   doc,
   serverTimestamp,
+  query,
+  orderBy
 } from "firebase/firestore";
 import { database } from "../config/firebase";
 import "./Card.css";
@@ -16,17 +18,19 @@ const Card = () => {
 
   // Fetch cards from Firestore
   const fetchCards = async () => {
-    const querySnapshot = await getDocs(collection(database, "cards"));
-    const cardData = querySnapshot.docs.map(doc => {
-      const data = doc.data();
-      return {
-        id: doc.id,
-        ...data,
-        createdAt: data.createdAt?.toDate().toLocaleString() || "N/A"
-      };
-    });
-    setCards(cardData);
-  };
+  const cardsRef = collection(database, "cards");
+  const q = query(cardsRef, orderBy("createdAt", "desc")); // Newest first
+  const querySnapshot = await getDocs(q);
+  const cardData = querySnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate().toLocaleString() || "N/A"
+    };
+  });
+  setCards(cardData);
+};
 
   useEffect(() => {
     fetchCards();
