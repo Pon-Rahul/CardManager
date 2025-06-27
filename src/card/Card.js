@@ -16,10 +16,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const Card = () => {
   const [cards, setCards] = useState([]);
 
-  // Fetch cards from Firestore
+
   const fetchCards = async () => {
     const cardsRef = collection(database, "cards");
-    const q = query(cardsRef, orderBy("createdAt", "desc")); // Newest first
+    const q = query(cardsRef, orderBy("createdAt", "desc"));
     const querySnapshot = await getDocs(q);
     const cardData = querySnapshot.docs.map((doc) => {
       const data = doc.data();
@@ -45,10 +45,10 @@ const Card = () => {
         "https://picsum.photos/200?random=" + Math.floor(Math.random() * 1000),
       createdAt: serverTimestamp(),
     });
-    fetchCards(); // Refresh list
+    fetchCards(); 
   };
 
-  // Delete a card
+
   const handleDelete = async (id) => {
     await deleteDoc(doc(database, "cards", id));
     setCards((prev) => prev.filter((card) => card.id !== id));
