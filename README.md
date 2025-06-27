@@ -4,6 +4,10 @@ A responsive React application that manages a dynamic list of cards using Fireba
 
 ---
 
+## 🌐 Live Demo
+
+👉 [Click here to view the app](https://cardmanger.netlify.app/)
+
 ## ✨ Features
 
 - 🔄 Realtime Firestore integration (CRUD)
