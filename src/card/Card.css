@@ -37,6 +37,7 @@
   border-radius: 8px;
   margin-top: 0.5rem;
   cursor: pointer;
+  margin-left: 8px;
 }
 
 .add-btn {
@@ -54,17 +55,34 @@
 @media (max-width: 768px) {
   .card {
     flex: 1 1 100%; /* Stack on tablets */
-    max-width: 100%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  .delete-btn{
+  margin-top: 16px;
+}
+
+.card-img{
+    width: 30%;
+}
+
+.card-container{
+    display: flex;
+    justify-content: center;
+}
 }
 
 @media (max-width: 480px) {
   .card {
     flex: 1 1 100%; /* Stack on mobile */
     padding: 0.8rem;
+    max-width: 70%;
   }
 
   .card-img {
     height: 100px;
+    width: 100%;
   }
 }
