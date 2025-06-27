@@ -15,6 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Card = () => {
   const [cards, setCards] = useState([]);
+  const [adding, setAdding] = useState(false);
 
 
   const fetchCards = async () => {
@@ -37,7 +38,9 @@ const Card = () => {
   }, []);
 
   // Add a new card
-  const handleAddCard = async () => {
+ const handleAddCard = async () => {
+  setAdding(true);
+  try {
     await addDoc(collection(database, "cards"), {
       title: "New Card",
       description: "Added via UI",
@@ -45,8 +48,13 @@ const Card = () => {
         "https://picsum.photos/200?random=" + Math.floor(Math.random() * 1000),
       createdAt: serverTimestamp(),
     });
-    fetchCards(); 
-  };
+    await fetchCards(); // refresh the list after add
+  } catch (error) {
+    console.error("Error adding card:", error);
+  } finally {
+    setAdding(false);
+  }
+};
 
 
   const handleDelete = async (id) => {
@@ -56,9 +64,9 @@ const Card = () => {
 
   return (
     <div>
-      <button className="add-btn" onClick={handleAddCard}>
-        ➕ Add Card
-      </button>
+      <button className="add-btn" onClick={handleAddCard} disabled={adding}>
+  {adding ? "Adding..." : "➕ Add Card"}
+</button>
       <div className="card-container">
         <AnimatePresence>
           {cards.map((card) => (
@@ -74,7 +82,7 @@ const Card = () => {
                 opacity: { duration: 0.3 },
               }}
             >
-              <img src={card.imageUrl} alt={card.title} className="card-img" />
+              <img src={card.imageUrl} alt={card.title || "Card image"} className="card-img" />
               <h3>{card.title}</h3>
               <p>{card.description}</p>
               <small className="timestamp">Created: {card.createdAt}</small>
