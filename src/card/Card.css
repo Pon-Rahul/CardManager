@@ -3,22 +3,16 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
-  justify-content: center;
 }
 
 .card {
   background: #fff;
   border-radius: 12px;
   padding: 1rem;
-  width: 100%;
-  max-width: 220px;
+  width: 220px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
   transition: transform 0.3s ease;
-  flex: 1 1 calc(50% - 2rem); /* Default 2 per row */
-}
-
-.card:hover {
-  transform: translateY(-4px);
 }
 
 .card-img {
@@ -43,7 +37,6 @@
   border-radius: 8px;
   margin-top: 0.5rem;
   cursor: pointer;
-  margin-left: 8px;
 }
 
 .add-btn {
@@ -55,28 +48,4 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-}
-
-/* 🔁 Responsive Media Queries */
-
-@media (max-width: 768px) {
-  .card {
-    flex: 1 1 100%; /* Stack on tablets */
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .card {
-    flex: 1 1 100%; /* Stack on mobile */
-    padding: 0.8rem;
-  }
-
-  .card-img {
-    height: 100px;
-  }
-
-  .add-btn {
-    width: 100%;
-  }
 }
