@@ -41,11 +41,30 @@
 
 .add-btn {
   display: block;         
-  margin: 1rem auto;     
+  margin: 1rem auto;
   font-size: 1rem;
   background: #1677ff;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%; /* Stack on tablets */
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%; /* Stack on mobile */
+    padding: 0.8rem;
+  }
+
+  .card-img {
+    height: 100px;
+  }
 }
